@@ -365,8 +365,8 @@
 	},
 "projectAttributes": {
 	"bowerAbbreviatedPath": "",
-	"displayValue": "pulley (git)",
-	"displayValueWasSetByUser": 0,
+	"displayValue": "Pulley Framework",
+	"displayValueWasSetByUser": 1,
 	"iconImageName": "globe_yellow"
 	},
 "projectSettings": {
