@@ -1,0 +1,49 @@
+.NavBar{
+	height: 44px;
+	background: gray;
+	color: white;
+	text-align: center;
+	font-size: 17px;
+	box-shadow: 0 -1px 0 rgba(0,0,0,.5) inset; //Dark line along bottom.
+	.inner{
+		position: relative; //Allow children to be absolulely positioned.
+		.navBarButton{
+			display: inline-block;
+			padding: 11px 15px;
+			margin: 0;
+			//background: rgba(255,0,0,.5);
+			opacity: .7;
+			transition: opacity 200ms;
+			&:hover{
+				opacity: 1;
+			}
+		}
+		.left{
+			position: absolute;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			padding: 0 10px;
+		}
+		.right{
+			position: absolute;
+			z-index: 1;
+			top: 0;
+			right: 0;
+			padding: 0 10px;
+		}
+		.middle{
+			font-weight: bold;
+			position: absolute;
+			width: 100%;
+			top: 0;
+			left: 0;
+			display: inline-block;
+			h1{
+				margin: 0 auto;
+				padding-top: 8px;
+				font-size: 19px;
+			}
+		}
+	}
+}

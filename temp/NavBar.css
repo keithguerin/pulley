@@ -1,0 +1,8 @@
+.NavBar{height:44px;background:#808080;color:#fff;text-align:center;font-size:17px;box-shadow:0 -1px 0 rgba(0,0,0,0.5) inset;}
+.NavBar .inner{position:relative;}
+.NavBar .inner .navBarButton{display:inline-block;padding:11px 15px;margin:0;opacity:.7;transition:opacity 200ms;}
+.NavBar .inner .navBarButton:hover{opacity:1}
+.NavBar .inner .left{position:absolute;z-index:1;top:0;left:0;padding:0 10px}
+.NavBar .inner .right{position:absolute;z-index:1;top:0;right:0;padding:0 10px}
+.NavBar .inner .middle{font-weight:bold;position:absolute;width:100%;top:0;left:0;display:inline-block;}
+.NavBar .inner .middle h1{margin:0 auto;padding-top:8px;font-size:19px}

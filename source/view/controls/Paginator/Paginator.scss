@@ -1,0 +1,84 @@
+.Paginator{
+	ul{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		li{
+			margin: 0;
+			display: block;
+			a{
+				display: block;
+				padding: 10.5px;
+				cursor: pointer;
+				transition: opacity .2s;
+				position: relative;
+				.bullet{
+					opacity: .7;
+					position: relative;
+					background: white;
+					border: none;
+					border-radius: 100%;
+					display: block;
+					width: 2px;
+					height: 2px;
+					border: 1px solid rgba(255, 255, 255, 0);
+					transition: border-color 0.2s, opacity 0.2s;
+				}
+				.label{
+					opacity: 0;
+					font-size: 13px;
+					color: white;
+					text-align: right;
+					width: 100px;
+					position: absolute;
+					top: 0;
+					left: -108px;
+					padding: 5px;
+					pointer-events: none;
+					transition: all .15s;
+				}
+			}
+			&.selected{
+				cursor: default;
+				a{
+					padding: 7px;
+					cursor: default;
+					.bullet{
+						width: 9px;
+						height: 9px;
+						background: none;
+						border-color: #ffffff;
+						opacity: .8;
+					}
+				}
+				&:hover{
+					a{
+						.bullet{
+							opacity: .8;
+							background: none;
+						}
+					}
+				}
+			}
+			&:hover{
+				a{
+					.bullet{
+						opacity: 1;
+						background-color: #74b377;
+					}
+					.label{
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+}
+.Paginator--horizontal{
+	display: inline-block;
+	ul{
+		li{
+			display: inline-block;
+		}
+	}
+}
