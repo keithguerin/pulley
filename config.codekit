@@ -321,43 +321,43 @@
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/HTMLInjector\/HTMLInjector.js",
+			"linkedFileAbbreviatedPath": "\/source\/view\/ViewController.js",
 			"position": 2,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/model\/LocalData.js",
+			"linkedFileAbbreviatedPath": "\/source\/model\/ModelController.js",
 			"position": 3,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/model\/ModelController.js",
+			"linkedFileAbbreviatedPath": "\/source\/model\/LocalData.js",
 			"position": 4,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/utility\/Utility.js",
+			"linkedFileAbbreviatedPath": "\/source\/HTMLInjector\/HTMLInjector.js",
 			"position": 5,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/view\/controls\/NavBar\/NavBar.js",
+			"linkedFileAbbreviatedPath": "\/source\/utility\/Utility.js",
 			"position": 6,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/view\/controls\/Paginator\/Paginator.js",
+			"linkedFileAbbreviatedPath": "\/source\/view\/controls\/NavBar\/NavBar.js",
 			"position": 7,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/view\/ViewController.js",
+			"linkedFileAbbreviatedPath": "\/source\/view\/controls\/Paginator\/Paginator.js",
 			"position": 8,
 			"type": 0
 			}

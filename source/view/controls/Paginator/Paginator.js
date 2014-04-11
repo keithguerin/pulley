@@ -223,17 +223,17 @@ pulley.view.controls.PaginatorVC = function(){
 
 
 //EXTEND
-pulley.view.controls.Paginator = pulley.view.ViewController.extend(new pulley.view.controls.Paginator());
-pulley.view.controls.Paginator.type
-pulley.view.controls.Paginator.prototype.type = 'pulley.view.controls.Paginator';
+pulley.view.controls.PaginatorVC = pulley.view.ViewController.extend(new pulley.view.controls.PaginatorVC());
+pulley.view.controls.PaginatorVC.type
+pulley.view.controls.PaginatorVC.prototype.type = 'pulley.view.controls.PaginatorVC';
 
 
 //STATIC VARS
-//pulley.view.controls.Paginator.staticVar = null;
+//pulley.view.controls.PaginatorVC.staticVar = null;
 
 
 //STATIC METHODS
-//pulley.view.controls.Paginator.staticMethod = function(){};
+//pulley.view.controls.PaginatorVC.staticMethod = function(){};
 
 
 /*****
