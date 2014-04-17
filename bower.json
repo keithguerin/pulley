@@ -1,6 +1,16 @@
 {
     "name": "Pulley",
+    "repo": "keithguerin/pulley",
+    "description": "Lightweight MVC JavaScript framework.",
     "author": "Keith Guerin",
-    "version": "1.11",
-    "main": "pulley.min.js"
+    "version": "1.12",
+    "main": "pulley.min.js",
+    "keywords": [
+		"javascript",
+		"js",
+		"mvc"
+	],
+	"dependencies": {
+		"jquery": "*"
+	},
 }
