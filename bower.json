@@ -3,7 +3,7 @@
     "repo": "keithguerin/pulley",
     "description": "Lightweight MVC JavaScript framework.",
     "author": "Keith Guerin",
-    "version": "1.13",
+    "version": "1.14",
     "main": "pulley.min.js",
     "keywords": [
 		"javascript",
