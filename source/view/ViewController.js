@@ -605,7 +605,7 @@ pulley.view.ViewController.STATE_CHANGED = 'stateChanged';
 //STATIC METHODS
 pulley.view.ViewController.createUniqueId = function(viewControllerInstance){
 	var objectPrototype = viewControllerInstance.__proto__;
-	if(!objectPrototype) viewControllerInstance.prototype;
+	if(!objectPrototype) objectPrototype = viewControllerInstance.prototype;
 	var uniqueId = null;
 	if(objectPrototype){
 		if(objectPrototype.instanceCounter == null) objectPrototype.instanceCounter = -1;
@@ -614,7 +614,9 @@ pulley.view.ViewController.createUniqueId = function(viewControllerInstance){
 	}else{
 		uniqueId = Math.floor(Math.random()*10000000);
 	}
-	var id = viewControllerInstance.type + '_' + uniqueId;
+	var type = viewControllerInstance.type;
+	if(!type) type = viewControllerInstance.localName;
+	var id = type + '_' + uniqueId;
 	return id;
 }
 
