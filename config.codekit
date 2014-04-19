@@ -45,91 +45,91 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/source\/Class.js": {
+	"\/src\/class.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/Class.js",
-		"outputAbbreviatedPath": "\/temp\/Class.min.js",
+		"inputAbbreviatedPath": "\/src\/class.js",
+		"outputAbbreviatedPath": "\/temp\/class.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/Controller.js": {
+	"\/src\/controller.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/Controller.js",
-		"outputAbbreviatedPath": "\/temp\/Controller.min.js",
+		"inputAbbreviatedPath": "\/src\/controller.js",
+		"outputAbbreviatedPath": "\/temp\/controller.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/HTMLInjector\/HTMLInjector.js": {
+	"\/src\/html-injector\/html-injector.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/HTMLInjector\/HTMLInjector.js",
-		"outputAbbreviatedPath": "\/temp\/HTMLInjector.min.js",
+		"inputAbbreviatedPath": "\/src\/html-injector\/html-injector.js",
+		"outputAbbreviatedPath": "\/temp\/html-injector.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/model\/LocalData.js": {
+	"\/src\/model\/local-data.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/model\/LocalData.js",
-		"outputAbbreviatedPath": "\/temp\/LocalData.min.js",
+		"inputAbbreviatedPath": "\/src\/model\/local-data.js",
+		"outputAbbreviatedPath": "\/temp\/local-data.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/model\/ModelController.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/model\/ModelController.js",
-		"outputAbbreviatedPath": "\/temp\/ModelController.min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
-		"syntaxCheckerStyle": 0
-		},
-	"\/source\/model\/ModelController_TEMPLATE.js": {
+	"\/src\/model\/model-controller TEMPLATE.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/model\/ModelController_TEMPLATE.js",
-		"outputAbbreviatedPath": "\/temp\/ModelController_TEMPLATE.min.js",
+		"inputAbbreviatedPath": "\/src\/model\/model-controller TEMPLATE.js",
+		"outputAbbreviatedPath": "\/temp\/model-controller TEMPLATE.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/pulley.js": {
+	"\/src\/model\/model-controller.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/src\/model\/model-controller.js",
+		"outputAbbreviatedPath": "\/temp\/model-controller.min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 2,
+		"syntaxCheckerStyle": 0
+		},
+	"\/src\/pulley.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/pulley.js",
-		"outputAbbreviatedPath": "\/dist\/pulley.min.js",
+		"inputAbbreviatedPath": "\/src\/pulley.js",
+		"outputAbbreviatedPath": "\/dist\/pulley.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 1,
-		"outputStyle": 2,
+		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/pulley.scss": {
+	"\/src\/pulley.scss": {
 		"createSourceMap": 1,
 		"debugStyle": 0,
 		"decimalPrecision": 5,
 		"fileType": 4,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/pulley.scss",
+		"inputAbbreviatedPath": "\/src\/pulley.scss",
 		"outputAbbreviatedPath": "\/dist\/pulley.min.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 1,
@@ -138,57 +138,57 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
-	"\/source\/utility\/Utility.js": {
+	"\/src\/utility\/utility.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/utility\/Utility.js",
-		"outputAbbreviatedPath": "\/temp\/Utility.min.js",
+		"inputAbbreviatedPath": "\/src\/utility\/utility.js",
+		"outputAbbreviatedPath": "\/temp\/utility.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/view\/controls\/NavBar\/NavBar.html": {
+	"\/src\/view\/controls\/guides\/guides.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/controls\/NavBar\/NavBar.html",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/guides\/guides.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/source\/view\/controls\/NavBar\/NavBar.jade": {
+	"\/src\/view\/controls\/guides\/guides.jade": {
 		"compileDebug": 1,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/controls\/NavBar\/NavBar.jade",
-		"outputAbbreviatedPath": "\/source\/view\/controls\/NavBar\/NavBar.html",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/guides\/guides.jade",
+		"outputAbbreviatedPath": "\/src\/view\/controls\/guides\/guides.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0
 		},
-	"\/source\/view\/controls\/NavBar\/NavBar.js": {
+	"\/src\/view\/controls\/guides\/guides.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/controls\/NavBar\/NavBar.js",
-		"outputAbbreviatedPath": "\/temp\/NavBar.min.js",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/guides\/guides.js",
+		"outputAbbreviatedPath": "\/temp\/guides.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/view\/controls\/NavBar\/NavBar.scss": {
+	"\/src\/view\/controls\/guides\/guides.scss": {
 		"createSourceMap": 1,
 		"debugStyle": 0,
 		"decimalPrecision": 5,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/controls\/NavBar\/NavBar.scss",
-		"outputAbbreviatedPath": "\/temp\/NavBar.css",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/guides\/guides.scss",
+		"outputAbbreviatedPath": "\/temp\/guides.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -196,46 +196,46 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
-	"\/source\/view\/controls\/Paginator\/Paginator.html": {
+	"\/src\/view\/controls\/nav-bar\/nav-bar.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/controls\/Paginator\/Paginator.html",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/nav-bar\/nav-bar.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/source\/view\/controls\/Paginator\/Paginator.jade": {
+	"\/src\/view\/controls\/nav-bar\/nav-bar.jade": {
 		"compileDebug": 1,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/controls\/Paginator\/Paginator.jade",
-		"outputAbbreviatedPath": "\/source\/view\/controls\/Paginator\/Paginator.html",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/nav-bar\/nav-bar.jade",
+		"outputAbbreviatedPath": "\/src\/view\/controls\/nav-bar\/nav-bar.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0
 		},
-	"\/source\/view\/controls\/Paginator\/Paginator.js": {
+	"\/src\/view\/controls\/nav-bar\/nav-bar.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/controls\/Paginator\/Paginator.js",
-		"outputAbbreviatedPath": "\/temp\/Paginator.min.js",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/nav-bar\/nav-bar.js",
+		"outputAbbreviatedPath": "\/temp\/nav-bar.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/view\/controls\/Paginator\/Paginator.scss": {
+	"\/src\/view\/controls\/nav-bar\/nav-bar.scss": {
 		"createSourceMap": 1,
 		"debugStyle": 0,
 		"decimalPrecision": 5,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/controls\/Paginator\/Paginator.scss",
-		"outputAbbreviatedPath": "\/temp\/Paginator.css",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/nav-bar\/nav-bar.scss",
+		"outputAbbreviatedPath": "\/temp\/nav-bar.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -243,123 +243,143 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
-	"\/source\/view\/ViewController.js": {
+	"\/src\/view\/controls\/paginator\/Paginator.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/src\/view\/controls\/paginator\/Paginator.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/src\/view\/controls\/paginator\/paginator.jade": {
+		"compileDebug": 1,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/src\/view\/controls\/paginator\/paginator.jade",
+		"outputAbbreviatedPath": "\/src\/view\/controls\/paginator\/paginator.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0
+		},
+	"\/src\/view\/controls\/paginator\/paginator.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/ViewController.js",
-		"outputAbbreviatedPath": "\/temp\/ViewController.min.js",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/paginator\/paginator.js",
+		"outputAbbreviatedPath": "\/temp\/paginator.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/source\/view\/ViewControllerTEMPLATE\/ViewControllerTEMPLATE.html": {
-		"fileType": 8192,
+	"\/src\/view\/controls\/paginator\/paginator.scss": {
+		"createSourceMap": 1,
+		"debugStyle": 0,
+		"decimalPrecision": 5,
+		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/ViewControllerTEMPLATE\/ViewControllerTEMPLATE.html",
-		"outputAbbreviatedPath": "No Output Path",
+		"inputAbbreviatedPath": "\/src\/view\/controls\/paginator\/paginator.scss",
+		"outputAbbreviatedPath": "\/temp\/paginator.css",
 		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": 0
 		},
-	"\/source\/view\/ViewControllerTEMPLATE\/ViewControllerTEMPLATE.jade": {
+	"\/src\/view\/view-controller TEMPLATE\/ViewControllerTEMPLATE.jade": {
 		"compileDebug": 1,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/ViewControllerTEMPLATE\/ViewControllerTEMPLATE.jade",
-		"outputAbbreviatedPath": "\/source\/view\/ViewControllerTEMPLATE\/ViewControllerTEMPLATE.html",
+		"inputAbbreviatedPath": "\/src\/view\/view-controller TEMPLATE\/ViewControllerTEMPLATE.jade",
+		"outputAbbreviatedPath": "\/src\/view\/view-controller TEMPLATE\/ViewControllerTEMPLATE.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0
 		},
-	"\/source\/view\/ViewControllerTEMPLATE\/ViewControllerTEMPLATE.js": {
+	"\/src\/view\/view-controller TEMPLATE\/ViewControllerTEMPLATE.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/source\/view\/ViewControllerTEMPLATE\/ViewControllerTEMPLATE.js",
+		"inputAbbreviatedPath": "\/src\/view\/view-controller TEMPLATE\/ViewControllerTEMPLATE.js",
 		"outputAbbreviatedPath": "\/temp\/ViewControllerTEMPLATE.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/temp\/NavBar.css": {
-		"fileType": 16,
-		"ignore": 1,
+	"\/src\/view\/view-controller.js": {
+		"fileType": 64,
+		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/temp\/NavBar.css",
-		"outputAbbreviatedPath": "No Output Path",
+		"inputAbbreviatedPath": "\/src\/view\/view-controller.js",
+		"outputAbbreviatedPath": "\/temp\/view-controller.min.js",
 		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/temp\/Pulley.css": {
-		"fileType": 16,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/temp\/Pulley.css",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 2,
+		"syntaxCheckerStyle": 0
 		}
 	},
 "hooks": [
 	],
 "lastSavedByUser": "Keith Guerin",
 "manualImportLinks": {
-	"\/source\/pulley.js": [
+	"\/src\/pulley.js": [
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/Class.js",
+			"linkedFileAbbreviatedPath": "\/src\/class.js",
 			"position": 0,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/Controller.js",
+			"linkedFileAbbreviatedPath": "\/src\/controller.js",
 			"position": 1,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/model\/ModelController.js",
+			"linkedFileAbbreviatedPath": "\/src\/model\/model-controller.js",
 			"position": 2,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/view\/ViewController.js",
+			"linkedFileAbbreviatedPath": "\/src\/utility\/utility.js",
 			"position": 3,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/utility\/Utility.js",
+			"linkedFileAbbreviatedPath": "\/src\/view\/controls\/nav-bar\/nav-bar.js",
 			"position": 4,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/view\/controls\/NavBar\/NavBar.js",
+			"linkedFileAbbreviatedPath": "\/src\/view\/controls\/paginator\/paginator.js",
 			"position": 5,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/view\/controls\/Paginator\/Paginator.js",
+			"linkedFileAbbreviatedPath": "\/src\/view\/controls\/guides\/guides.js",
 			"position": 6,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/model\/LocalData.js",
+			"linkedFileAbbreviatedPath": "\/src\/model\/local-data.js",
 			"position": 7,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/source\/HTMLInjector\/HTMLInjector.js",
+			"linkedFileAbbreviatedPath": "\/src\/html-injector\/html-injector.js",
 			"position": 8,
 			"type": 0
 			}

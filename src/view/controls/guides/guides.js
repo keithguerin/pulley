@@ -1,11 +1,13 @@
 /*****
-Class: FooVC
+Class: pulley.view.controls.GuidesVC
 Extends: ViewController, Controller
 Notes: 
 *****/
-company.project.view.views.FooVC = function(){
+pulley.view.controls.GuidesVC = function(){
+	
 	
 	//IMPORT
+	var FooVC = pulley.view.controls.GuidesVC;
 	//var FooModel = company.project.model.valueobjects.FooModel;
 	
 	//var myPrivateVar = null;//Call without 'this'. Does not work since it can only access the prototype and not the instance.
@@ -13,6 +15,7 @@ company.project.view.views.FooVC = function(){
 	
 	//function myPrivateMethod(){};//Call via myPrivateMethod(). Does not work since it can only access the prototype and not the instance.
 	//this.myPublicMethod = function(){};//Must be public to override. Call via this.myPublicMethod().
+	
 	
 	this.init = function(){//(arguments):void (Arguments are different, whether using Angular or Pulley)
 		
@@ -30,6 +33,7 @@ company.project.view.views.FooVC = function(){
 		
 		//MODEL
 		//this.model.valueA = null;
+		this.model.numberOfGuidesToShow = getURLVar('guides');
 		
 		//VIEW
 		//this.children.state1			= this.view.find('.clip')[0];//or .toArray()
@@ -56,8 +60,39 @@ company.project.view.views.FooVC = function(){
 		//INIT CHILDREN
 		//
 		
+		if(onComplete) onComplete();
+	}
+	
+	
+	this.ready = function(onComplete){//(function):void
+		//DEFINE CHILDREN (before calling super)
+		//this.children.navBar			= window._controllers['NavBarVC0'];//Locate the auto-initialized controller.
+		
+		this._super();//Call after children are defined.
+		
+		//READY CHILDREN
+		//
+		
 		//INIT INTERACTION
 		//
+		
+		//SET INITIAL STATE
+		//this.setState(0, null, false);//(state:State or Number, stateModel:ModelController, useTransition:Boolean):void
+		//Show guides for debugging
+		switch(this.numberOfGuidesToShow){
+			case '1':
+				$(this.view).find('.one-column').css({display:'block'}); break;
+			case '2':
+				$(this.view).find('.two-columns').css({display:'block'}); break;
+			case '3':
+				$(this.view).find('.three-columns').css({display:'block'}); break;
+			case '4':
+				$(this.view).find('.four-columns').css({display:'block'}); break;
+			case '6':
+				$(this.view).find('.six-columns').css({display:'block'}); break;
+			case '12':
+				$(this.view).find('.twelve-columns').css({display:'block'}); break;
+		}
 		
 		if(onComplete) onComplete();
 	}
@@ -73,29 +108,16 @@ company.project.view.views.FooVC = function(){
 		//destroy INTERACTION
 		//
 	}*/
-	this.ready = function(onComplete){//(function):void
-		//DEFINE CHILDREN (before calling super)
-		//this.children.navBar			= window._controllers['NavBarVC0'];//Locate the auto-initialized controller.
-		
-		this._super();//Call after children are defined.
-		
-		//READY CHILDREN
-		//
-		
-		//INIT INTERACTION
-		//
-		
-		//SET INITIAL STATE
-		this.setState(0, null, false);//(state:State or Number, stateModel:ModelController, useTransition:Boolean):void
-		
-		if(onComplete) onComplete();
-	}
+	
+	
 	/*this.reset = function(resetModel){//(Boolean):void
 		this._super(resetModel);
 	}*/
 	/*this.focus = function(){//():void
 		this._super();
 	}*/
+	
+	
 	/*this.setModel = function(model){//(FooModel):void
 		//this._super(model);//Override
 		var hasModelChanged = (model != this.model);
@@ -128,7 +150,21 @@ company.project.view.views.FooVC = function(){
 		if(hasModelChanged){
 			//goto();
 		}
+	}
+	this.model_onLoaded = function(event, data){
+		this.setModel(this.model);
+	}
+	this.model_onChanged = function(event, data){
+		this.apply();
+	}
+	this.model_onSaved = function(event, data){
+		this.setModel(this.model);
+	}
+	this.model_onDeleted = function(event, data){
+		this.apply();
 	}*/
+	
+	
 	/*this.apply = function(){//(void):void
 		this._super();
 		
@@ -136,18 +172,6 @@ company.project.view.views.FooVC = function(){
 	}*/
 	/*this.setSize = function(w, h){//(int, int):void{
 		this._super(w, h);
-	}*/
-	this.model_onLoaded = function(event, data){
-		this.setModel(this.model);
-	}
-	this.model_onChanged = function(event, data){
-		this.apply();
-	}
-	/*this.model_onSaved = function(event, data){
-		this.setModel(this.model);
-	}
-	this.model_onDeleted = function(event, data){
-		this.apply();
 	}*/
 	
 	
@@ -190,9 +214,9 @@ company.project.view.views.FooVC = function(){
 
 
 //EXTEND
-company.project.view.views.FooVC = pulley.view.ViewController.extend(new company.project.view.views.FooVC());
-company.project.view.views.FooVC.type =
-company.project.view.views.FooVC.prototype.type = 'company.project.view.views.FooVC';
+pulley.view.controls.GuidesVC = pulley.view.ViewController.extend(new pulley.view.controls.GuidesVC());
+pulley.view.controls.GuidesVC.type =
+pulley.view.controls.GuidesVC.prototype.type = 'pulley.view.controls.GuidesVC';
 
 
 //STATIC VARS
@@ -200,7 +224,7 @@ company.project.view.views.FooVC.prototype.type = 'company.project.view.views.Fo
 
 
 //STATIC METHODS
-//company.project.view.views.FooVCstaticMethod = function(){};
+//pulley.view.controls.GuidesVC.staticMethod = function(){};
 
 
 /*****

@@ -1,0 +1,29 @@
+.guides{
+	display: none;
+	position: fixed;
+	z-index: 99999;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	.container{
+		display: none; //All hidden by default.
+		position: relative;//Allow .row to be absolutely positioned.
+		height: 100%;
+		.row{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			>div{
+				height: 100%;
+				box-shadow: inset -1px 0px 0px rgba(0, 255, 255, .2);//Simulates a border, without increasing the box's size.
+				&:first-child{
+					box-shadow: inset 0px 0px 0px 1px rgba(0, 255, 255, .2);//Simulates a border on all four sides, without increasing the box's size.
+				}
+				>.inner{
+					height: 100%;
+					box-shadow: inset 0px 0px 0px 1px rgba(0, 255, 255, 1);//Simulates a border, without increasing the box's size.
+				}
+			}
+		}
+	}
+}
