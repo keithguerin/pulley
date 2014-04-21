@@ -4,6 +4,8 @@ Extends: ModelController, Controller
 Notes: 
 *****/
 
+registerNamespace('pulley.view.controls');
+
 pulley.view.controls.NavBarModel = function(){
 	
 	var NavBarModel = pulley.view.controls.NavBarModel;

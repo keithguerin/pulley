@@ -3,6 +3,9 @@ Class: pulley.view.controls.GuidesVC
 Extends: ViewController, Controller
 Notes: 
 *****/
+
+registerNamespace('pulley.view.controls');
+
 pulley.view.controls.GuidesVC = function(){
 	
 	

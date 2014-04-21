@@ -17,6 +17,7 @@ These techniques are useful, because they allow you to organize your code cleanl
 They make the developers job easier, by giving a little bit more work to JavaScript.
 *****/
 
+registerNamespace('pulley');
 pulley.HTMLInjector = function(){
 	//No real constructor, since this is a static class.
 }

@@ -4,6 +4,8 @@ Extends: ModelController, Controller
 Notes: 
 *****/
 
+registerNamespace('pulley.model');
+
 pulley.model.LocalData = function(){
 	
 	//IMPORT

@@ -1,5 +1,5 @@
 //DEFINE PULLEY APPLICATION NAMESPACE
-if(!window.pulley){
+/*if(!window.pulley){
 	window.pulley = {
 		model:{
 			valueobjects:{}
@@ -8,7 +8,61 @@ if(!window.pulley){
 			controls:{}
 		}
 	}
+}*/
+
+function registerNamespace(namespace){ //(String):void
+	var namespaceParts = namespace.split('.');
+	if(namespaceParts.length > 7) e.e; //Only 7 levels of depth are supported. Add more below if needed.
+	var p0 = namespaceParts[0];
+	var p1 = namespaceParts[1];
+	var p2 = namespaceParts[2];
+	var p3 = namespaceParts[3];
+	var p4 = namespaceParts[4];
+	var p5 = namespaceParts[5];
+	var p6 = namespaceParts[6];
+	for(var i in namespaceParts){
+		i = eval(i);
+		switch(i){
+			case 0:
+				if(!window[p0]){//If the namespace doesn't exist yet, create it.
+					window[p0] = {};
+				}
+				break;
+			case 1:
+				if(!window[p0][p1]){
+					window[p0][p1] = {};
+				}
+				break;
+			case 2:
+				if(!window[p0][p1][p2]){
+					window[p0][p1][p2] = {};
+				}
+				break;
+			case 3:
+				if(!window[p0][p1][p2][p3]){
+					window[p0][p1][p2][p3] = {};
+				}
+				break;
+			case 4:
+				if(!window[p0][p1][p2][p3][p4]){
+					window[p0][p1][p2][p3][p4] = {};
+				}
+				break;
+			case 5:
+				if(!window[p0][p1][p2][p3][p4][p5]){
+					window[p0][p1][p2][p3][p4][p5] = {};
+				}
+				break;
+			case 6:
+				if(!window[p0][p1][p2][p3][p4][p5][p6]){
+					window[p0][p1][p2][p3][p4][p5][p6] = {};
+				}
+				break;
+		}
+	}
 }
+registerNamespace('pulley');
+
 
 /*****
 Class: Controller

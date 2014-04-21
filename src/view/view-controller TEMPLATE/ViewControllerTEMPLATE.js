@@ -3,6 +3,9 @@ Class: company.project.view.views.FooVC
 Extends: ViewController, Controller
 Notes: 
 *****/
+
+registerNamespace('company.project.view.views');
+
 company.project.view.views.FooVC = function(){
 	
 	

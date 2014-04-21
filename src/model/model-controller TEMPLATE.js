@@ -1,9 +1,12 @@
 /*****
-Class: FooModel
+Class: company.project.model.valueobjects.FooModel
 Extends: ModelController, Controller
 Notes: 
 *****/
-company.project.model.valueobject.FooModel = function(){
+
+registerNamespace('company.project.model.valueobjects');
+
+company.project.model.valueobjects.FooModel = function(){
 	
 	//IMPORT
 	//var FooModel = company.project.model.valueobjects.FooModel;
@@ -47,21 +50,22 @@ company.project.model.valueobject.FooModel = function(){
 	
 	//INSTANCE METHODS
 	//
+	
 }
 
 
 //EXTEND
-company.project.model.valueobject.FooModel = pulley.model.ModelController.extend(new company.project.model.valueobject.FooModel());
-company.project.model.valueobject.FooModel.type = 
-company.project.model.valueobject.FooModel.prototype.type = 'company.project.model.valueobject.FooModel';
+company.project.model.valueobjects.FooModel = pulley.model.ModelController.extend(new company.project.model.valueobjects.FooModel());
+company.project.model.valueobjects.FooModel.type = 
+company.project.model.valueobjects.FooModel.prototype.type = 'company.project.model.valueobjects.FooModel';
 
 
 //STATIC VARS
-//company.project.model.valueobject.FooModel.staticVar = null;
+//company.project.model.valueobjects.FooModel.staticVar = null;
 
 
 //STATIC METHODS
-//company.project.model.valueobject.FooModel.staticMethod = function(){};
+//company.project.model.valueobjects.FooModel.staticMethod = function(){};
 
 
 /*****

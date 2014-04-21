@@ -4,6 +4,8 @@ Extends: ViewController, Controller
 Notes:
 *****/
 
+registerNamespace('pulley.view.controls');
+
 pulley.view.controls.PaginatorVC = function(){
 	
 	//IMPORT

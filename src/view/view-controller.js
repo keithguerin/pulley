@@ -3,6 +3,9 @@ Class: ViewController
 Extends: Controller
 Notes: All view classes should extend this class. It adds additional methods that are needed throughout the app.
 *****/
+
+registerNamespace('pulley.view');
+
 pulley.view.ViewController = function(){
 	
 	//IMPORT
