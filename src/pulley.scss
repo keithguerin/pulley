@@ -1,5 +1,191 @@
-//This file and all other JavaScript files are concatonated and compressed by CodeKit into ../pulley.min.css
+//This file and all other JavaScript files are concatonated and compressed by CodeKit into ../Pulley.min.css
 
+@import 'view/controls/guides/guides.scss';
 @import 'view/controls/nav-bar/nav-bar.scss';
 @import 'view/controls/paginator/paginator.scss';
-@import 'view/controls/guides/guides.scss';
+@import 'view/controls/slider/slider.scss';
+
+
+//Create breakpoint variables, based on bootstrap.
+$smallBreakpoint: 768px;
+$mediumBreakpoint: 992px;
+$largeBreakpoint: 1200px;
+
+
+//Create variables that can be used as media queries.
+//Usage: @media #{$smallMediaQuery} {
+$extraSmallMediaQuery: 'screen and (max-width: 767px)';
+$smallMediaQuery: 'screen and (min-width: 768px) and (max-width: 991px)';
+$mediumMediaQuery: 'screen and (min-width: 992px) and (max-width: 1199px)';
+$largeMediaQuery: 'screen and (min-width: 1200px)';
+
+$smallOrSmallerMediaQuery: 'screen and (max-width: 991px)';
+$mediumOrSmallerMediaQuery: 'screen and (max-width: 1199px)';
+
+$smallOrLargerMediaQuery: 'screen and (min-width: 768px)';
+$mediumOrLargerMediaQuery: 'screen and (min-width: 992px)';
+
+
+//Create classes that can serve as shortcuts for media queries.
+.xs,
+.sm,
+.md,
+.lg{
+	display: none;
+}
+@media #{$extraSmallMediaQuery} {
+	.xs{
+		display: block;
+		&.inline-block{
+			display: inline-block;
+		}
+		&.inline{
+			display: inline;
+		}
+		&.table{
+			display: table;
+		}
+		&.table-cell{
+			display: table-cell;
+		}
+	}
+}
+@media #{$smallMediaQuery} {
+	.sm{
+		display: block;
+		&.inline-block{
+			display: inline-block;
+		}
+		&.inline{
+			display: inline;
+		}
+		&.table{
+			display: table;
+		}
+		&.table-cell{
+			display: table-cell;
+		}
+	}
+}
+@media #{$mediumMediaQuery} {
+	.md{
+		display: block;
+		&.inline-block{
+			display: inline-block;
+		}
+		&.inline{
+			display: inline;
+		}
+		&.table{
+			display: table;
+		}
+		&.table-cell{
+			display: table-cell;
+		}
+	}
+}
+@media #{$largeMediaQuery} {
+	.lg{
+		display: block;
+		&.inline-block{
+			display: inline-block;
+		}
+		&.inline{
+			display: inline;
+		}
+		&.table{
+			display: table;
+		}
+		&.table-cell{
+			display: table-cell;
+		}
+	}
+}
+
+
+
+
+
+
+//Add styles to allow 5 columns in bootstrap.
+//Via http://www.wearesicc.com/quick-tips-5-column-layout-with-twitter-bootstrap/
+.col-xs-one-fifth,
+.col-sm-one-fifth,
+.col-md-one-fifth,
+.col-lg-one-fifth {
+	position: relative;
+	min-height: 1px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+.col-xs-one-fifth {
+	width: 20%;
+	float: left;
+}
+@media (min-width: 768px) {
+.col-sm-one-fifth {
+		width: 20%;
+		float: left;
+	}
+}
+@media (min-width: 992px) {
+	.col-md-one-fifth {
+		width: 20%;
+		float: left;
+	}
+}
+@media (min-width: 1200px) {
+	.col-lg-one-fifth {
+		width: 20%;
+		float: left;
+	}
+}
+
+
+
+
+
+
+
+
+
+//Match column heights (Option 1)
+//http://stackoverflow.com/questions/19695784/how-can-i-make-bootstrap-columns-all-the-same-height
+.row-match-heights-1 { //Apply this to the row.
+	display: table;
+}
+.col-match-heights-1 { //Apply this to the columns.
+	display: table-cell; vertical-align: top; float: none;
+}
+
+
+
+
+//Match column heights (Option 2)
+//http://stackoverflow.com/questions/19695784/how-can-i-make-bootstrap-columns-all-the-same-height
+.row-match-heights { //Apply this to the row.
+	overflow: hidden;
+}
+.col-match-heights { //Apply this to the columns.
+	margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Fix blurry filters on retina displays.
+.retina-filter-fix {
+	//-webkit-transform: translateZ(0);
+	* {-webkit-backface-visibility: hidden;}
+}

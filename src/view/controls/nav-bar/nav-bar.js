@@ -1,14 +1,13 @@
 /*****
-Class: NavBarModel
-Extends: ModelController, Controller
+Class: Pulley.view.controls.NavBarModel
+Extends: Backbone.Model
 Notes: 
 *****/
 
-registerNamespace('pulley.view.controls');
-
-pulley.view.controls.NavBarModel = function(){
+registerNamespace('Pulley.view.controls');
+Pulley.view.controls.NavBarModel = function(){
 	
-	var NavBarModel = pulley.view.controls.NavBarModel;
+	var NavBarModel = Pulley.view.controls.NavBarModel;
 	//IMPORT
 	//var FooModel = company.project.model.valueobjects.FooModel;
 	
@@ -23,9 +22,9 @@ pulley.view.controls.NavBarModel = function(){
 		//PROPERTIES
 		//this.id //String super
 		//this.type //String super
-		this.left = null;//String, or Array of Elements or ViewControllers
+		this.left = null;//String, or Array of Elements or Pulley.Views
 		this.middle = null;//String
-		this.right = null;//String, or Array of Elements or ViewControllers
+		this.right = null;//String, or Array of Elements or Pulley.Views
 		
 		this._super(initObj);//Call after setting properties. Don't pass through onComplete
 		
@@ -39,15 +38,15 @@ pulley.view.controls.NavBarModel = function(){
 	}*/
 	this.setModel_left = function(model){//(String of HTML, Element, or Array of Elements):void
 		this.left = model;
-		this.dispatchEvent(pulley.view.controls.NavBarModel.CHANGED);
+		this.dispatchEvent(Pulley.view.controls.NavBarModel.CHANGED);
 	}
 	this.setModel_right = function(model){//(String of HTML, Element, or Array of Elements):void
 		this.right = model;
-		this.dispatchEvent(pulley.view.controls.NavBarModel.CHANGED);
+		this.dispatchEvent(Pulley.view.controls.NavBarModel.CHANGED);
 	}
 	this.setModel_middle = function(model){//(String of HTML, Element, or Array of Elements):void
 		this.middle = model;
-		this.dispatchEvent(pulley.view.controls.NavBarModel.CHANGED);
+		this.dispatchEvent(Pulley.view.controls.NavBarModel.CHANGED);
 	}
 	/*this.load = function(onSuccess, onError){
 		this._super(onSuccess, onError);
@@ -66,17 +65,16 @@ pulley.view.controls.NavBarModel = function(){
 
 
 //EXTEND
-pulley.view.controls.NavBarModel = pulley.model.ModelController.extend(new pulley.view.controls.NavBarModel());
-pulley.view.controls.NavBarModel.type = 
-pulley.view.controls.NavBarModel.prototype.type = 'pulley.view.controls.NavBarModel';
+Pulley.view.controls.NavBarModel = Backbone.Model.extend(new Pulley.view.controls.NavBarModel());
+Pulley.view.controls.NavBarModel.type = Pulley.view.controls.NavBarModel.prototype.type = 'Pulley.view.controls.NavBarModel';
 
 
 //STATIC VARS
-pulley.view.controls.NavBarModel.CHANGED = 'changed';
+Pulley.view.controls.NavBarModel.CHANGED = 'changed';
 
 
 //STATIC METHODS
-//pulley.view.controls.NavBarModel.staticMethod = function(){};
+//Pulley.view.controls.NavBarModel.staticMethod = function(){};
 
 
 /*****
@@ -93,38 +91,41 @@ End Class: NavBarModel
 
 
 /*****
-Class: NavBarVC
-Extends: ViewController, Controller
+Class: Pulley.view.controls.NavBar
+Extends: Pulley.View, Pulley.Controller
 Notes: 
 *****/
 
-pulley.view.controls.NavBarVC = function(){
+registerNamespace('Pulley.view.controls');
+
+Pulley.view.controls.NavBar = function(){
 	
 	this.init = function(){//(arguments):void (Arguments are different, whether using Angular or Pulley)
 		
+		//SETTINGS
+		//this.settings_defaults = {};
+		
 		if(this.initializedByAngular){
 			this._super.call(this, arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]);
-		}else{//Using pulley patterns
-			var view = arguments[0];
-			var model = arguments[1];
-			var onComplete = arguments[2];
-			this._super(view, model);//Don't pass through onComplete.
+		}else{//Using Pulley patterns
+			var view_temp = arguments[0];
+			var model_temp = arguments[1];
+			var settings_temp = arguments[2];
+			var onComplete = arguments[3];
+			this._super(view_temp, model_temp, settings_temp);//Don't pass through onComplete.
 		}
-		
-		//SETTINGS
-		//this.settings.settingA = null;
 		
 		//MODEL
 		//this.model.valueA = null;
 		
 		//VIEW
-		this.children.left = this.$view.find('>.inner >.left')[0];
-		this.children.middle = this.$view.find('>.inner >.middle')[0];
-		this.children.right = this.$view.find('>.inner >.right')[0];
+		this.children.left = this.$('>.inner >.left')[0];
+		this.children.middle = this.$('>.inner >.middle')[0];
+		this.children.right = this.$('>.inner >.right')[0];
 			
 		//CONTROLLER
 		/*this.states = [
-			new State({
+			new Pulley.view.State({
 				id:'stateId',
 				name:'Default',
 				hash:'',
@@ -138,7 +139,7 @@ pulley.view.controls.NavBarVC = function(){
 	}
 	
 	
-	//EXTEND ViewController
+	//EXTEND Pulley.View
 	this.destroy = function(){
 		this._super();//Don't pass through onComplete.
 		
@@ -174,20 +175,20 @@ pulley.view.controls.NavBarVC = function(){
 		if(hasModelChanged){
 			this.model = model;
 			//SET MODEL TO SELF
-			this.model.addEventListener(pulley.view.controls.NavBarModel.CHANGED, this, this.model_onChanged);//(eventName, originalScope, listenerFunction)
+			this.model.addEventListener(Pulley.view.controls.NavBarModel.CHANGED, this, this.model_onChanged);//(eventName, originalScope, listenerFunction)
 		
 			//SET MODEL TO CHILDREN
 			//
 		}
 		
 		//UPDATE THE VIEW
-		this.apply();
+		this.render();
 		
 		if(hasModelChanged){
 			//goto();
 		}
 	}
-	this.apply = function(){//(void):void
+	this.render = function(){//(void):void
 		this._super();
 		
 		//RESET UI AS NEEDED
@@ -195,7 +196,7 @@ pulley.view.controls.NavBarVC = function(){
 		this.children.middle.innerHTML = '';
 		this.children.right.innerHTML = '';
 		
-		//APPLY MODEL
+		//RENDER MODEL
 		if(this.model){
 			
 			//CREATE CONTROLS
@@ -213,8 +214,8 @@ pulley.view.controls.NavBarVC = function(){
 					$content = null;
 				}else if(partModel instanceof Array){
 					$content = $(partModel);
-				}else if(partModel instanceof pulley.view.ViewController){
-					$content = partModel.$view;
+				}else if(partModel instanceof Pulley.View){
+					$content = partModel.$el;
 				}else if(partModel instanceof Element){
 					$content = $(partModel);
 				}else if(typeof partModel === 'string'){
@@ -234,7 +235,7 @@ pulley.view.controls.NavBarVC = function(){
 	//STATE IMPLEMENTATIONS
 	/*this.setState_stateId = function(useTransition, stateModel, reverse, onComplete){//(Boolean, Boolean, Function):void
 		var _this = this;
-		var lockId = 'NavBarVC.setState_stateId '+Math.random();
+		var lockId = 'NavBar.setState_stateId '+Math.random();
 		//__app.lock(lockId);
 		
 		//Hide all non-relevant siblings, to be sure they are gone.
@@ -260,32 +261,32 @@ pulley.view.controls.NavBarVC = function(){
 	}*/
 	
 	this.model_onChanged = function(eventName, data){//(eventName, data)
-		if(__config.logging) log('NavBarVC._applyModelToView()');
-		this.apply();
+		if(__config.logging) log('NavBar._render()');
+		this.render();
 	}
 	
 }
 
 
 //EXTEND
-pulley.view.controls.NavBarVC = pulley.view.ViewController.extend(new pulley.view.controls.NavBarVC());
-pulley.view.controls.NavBarVC.type = 
-pulley.view.controls.NavBarVC.prototype.type = 'pulley.view.controls.NavBarVC';
+Pulley.view.controls.NavBar = Pulley.View.extend(new Pulley.view.controls.NavBar());
+Pulley.view.controls.NavBar.type = 
+Pulley.view.controls.NavBar.prototype.type = 'Pulley.view.controls.NavBar';
 
 
 //STATIC VARS
-//pulley.view.controls.NavBarVC.staticVar = 'staticVar';
+//Pulley.view.controls.NavBar.staticVar = 'staticVar';
 
 
 //STATIC METHODS
-pulley.view.controls.NavBarVC.getClassNameByLabel = function(label){//(String):String
+Pulley.view.controls.NavBar.getClassNameByLabel = function(label){//(String):String
 	var className = label.toCamelCase()+'Button';
 	return className;
 }
 
 
 /*****
-End Class: NavBarVC
+End Class: NavBar
 *****/
 
 

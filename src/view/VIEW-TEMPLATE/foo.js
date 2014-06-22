@@ -1,21 +1,21 @@
 /*****
-Module: Pulley.view.controls.Guides
-	Extends: Pulley.View, Backbone.View
+Module: Pulley.view.Foo
+Extends: Pulley.View, Backbone.View
 Notes: 
 *****/
 
-registerNamespace('Pulley.view.controls');
-Pulley.view.controls.Guides = Pulley.View.extend({
+registerNamespace('Pulley.view');
+Pulley.view.Foo = Pulley.View.extend({
 	
 	
 	//el
 	//$el
+	//tagName: 'div',
+	//className: 'foo',
+	template: Handlebars.compile('<div class="foo"></div>'),
+	//template: Handlebars.compile($("#foo-template").html()),
 	//attributes
-	tagName: 'div',
-	className: 'foo',
 	//model: null, // Backbone.Model
-	//template: Handlebars.compile('<div class="foo"></div>'),
-	template: Handlebars.compile($("#guides-template").html()),
 	//defaults: {id: null, // integer},
 	//events: {'click .openbutton': 'open'},
 	
@@ -25,12 +25,9 @@ Pulley.view.controls.Guides = Pulley.View.extend({
 		Pulley.View.prototype.initialize.apply(this, arguments); // Call super.
 		
 		//Define instance vars
-		this.model = {
-			numberOfGuidesToShow: parseInt(getURLVar('guides')),
-		};
+		//this.bar = null;
 		
-		//Set initial state
-		this.render();
+		//this.listenTo(this.model, 'change', this.render);
 	},
 	
 	render: function () {
@@ -46,33 +43,9 @@ Pulley.view.controls.Guides = Pulley.View.extend({
 			//this.$('.widget-container').append(this.children.widget.el);
 		}
 		
-		//Show guides for debugging
-		if(this.model){
-			if(this.model.numberOfGuidesToShow){
-				this.$el.css({display:'block'});
-				switch(this.model.numberOfGuidesToShow){
-					case 1:
-						this.$('.one-column').css({display:'block'}); break;
-					case 2:
-						this.$('.two-columns').css({display:'block'}); break;
-					case 3:
-						this.$('.three-columns').css({display:'block'}); break;
-					case 4:
-						this.$('.four-columns').css({display:'block'}); break;
-					case 5:
-						this.$('.five-columns').css({display:'block'}); break;
-					case 6:
-						this.$('.six-columns').css({display:'block'}); break;
-					case 12:
-						this.$('.twelve-columns').css({display:'block'}); break;
-				}
-			}else{
-				this.$el.remove();
-			}
-		}
-		
 		return this; //Enable chained calls.
 	},
+	
 	
 	/*
 	setElement: function (element) {},
@@ -98,16 +71,16 @@ Pulley.view.controls.Guides = Pulley.View.extend({
 	setStateByHash: function (hash, stateModel, useTransition, onComplete) { // (String, stateModel:Object, useTransition:Boolean, onComplete:Function):void
 	*/
 	
-	/*setModel: function (model) {
+	setModel: function (model) {
 		//Pulley.View.prototype.setModel.apply(this, arguments); // Call super.
 		this.model = model;
 		this.render();
 		this.listenTo(this.model, 'change', this.render);
-	},*/
+	},
 	
 	
 	//Define module methods
-	/*load: function(onSuccess, onError) {
+	/*load: function (onSuccess, onError) {
 		var _this = this;
 		ajax({
 			url: this.APIPath,
@@ -130,19 +103,19 @@ Pulley.view.controls.Guides = Pulley.View.extend({
 	},*/
 	//someMethod: function (arg1, arg2) {}
 	
-	
+		
 });
-Pulley.view.controls.Guides.type = Pulley.view.controls.Guides.prototype.type = 'Pulley.view.controls.Guides';
+Pulley.view.Foo.type = Pulley.view.Foo.prototype.type = 'Pulley.view.Foo';
 
 
 //STATIC VARS
-//Pulley.view.controls.Guides.STATIC_VAR = 'myStaticVar';
+//Pulley.view.Foo.STATIC_VAR = 'myStaticVar';
 
 
 //STATIC METHODS
-//Pulley.view.controls.Guides.staticMethod = function(){};
+//Pulley.view.Foo.staticMethod = function(){};
 
 
 /*****
-End Module: Pulley.view.controls.Guides
+End Module: Pulley.view.Foo
 *****/

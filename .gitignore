@@ -1,0 +1,8 @@
+config.codekit
+.codekit-cache
+.sass-cache
+temp
+*.scssc
+*.DS_Store
+*.map
+*.log

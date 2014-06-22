@@ -1,0 +1,73 @@
+.slider{
+	>.inner{
+		position: relative;
+		nav{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			$navButtonWidth: 40px;
+			.previous-button, .next-button{
+				//background: rgba(0,0,200,.3);
+				height: 100%;
+				cursor: pointer;
+				position: absolute;
+				opacity: 0.3;
+				transition: all 300ms;
+				width: $navButtonWidth;
+				text-align: center; //Center the image.
+				&:hover{
+					opacity: 1;
+				}
+				display: table;
+				>.inner{
+					display: table-cell;
+					vertical-align: middle;
+					img{
+						//
+					}
+				}
+			}
+			.previous-button{
+				left: - $navButtonWidth;
+			}
+			.next-button{
+				right: - $navButtonWidth;
+			}
+			.Paginator{
+				//background: rgba(255,0,0,.3);
+				z-index:345234643;
+				position: absolute;
+				bottom: -23px;
+				width: 100%;
+				display: inline-block;
+				ul{
+					li{
+						display: inline-block;
+						//background: black;
+						.label{
+							display: none;
+						}
+					}
+				}
+			}
+		}
+		>ul.slides{
+			position: relative; //Allow for slides to be absolutely positioned.
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			>li.slide{
+				display: none; opacity: 0; //Hidden by default; //Also done by JavaScript view controller.
+				&:first-child{
+					display: block; opacity: 1; //Unhide
+				}
+				margin: 0;
+				padding: 0;
+				//position: absolute;
+				top: 0;
+				left: 0;
+				
+			}
+		}
+	}
+}

@@ -1,12 +1,11 @@
 /*****
-Class: LocalData
-Extends: ModelController, Controller
+Class: Pulley.model.LocalData
+Extends: Backbone.Model
 Notes: 
 *****/
 
-registerNamespace('pulley.model');
-
-pulley.model.LocalData = function(){
+registerNamespace('Pulley.model');
+Pulley.model.LocalData = Backbone.Model.extend({
 	
 	//IMPORT
 	//var FooModel = company.project.model.valueobjects.FooModel;
@@ -17,9 +16,9 @@ pulley.model.LocalData = function(){
 	//function myPrivateMethod(){};//Call via myPrivateMethod(). Does not work since it can only access the prototype and not the instance.
 	//this.myPublicMethod = function(){};//Must be public to override. Call via this.myPublicMethod().
 	
-	this.init = function(modelControllerClassesByType, onComplete){	
+	this.init = function(modelClassesByType, onComplete){	
 		
-		this.modelControllerClassesByType = modelControllerClassesByType;//An object that maps the strings that the API calls objects to their ModelController classes.
+		this.modelClassesByType = modelClassesByType;//An object that maps the strings that the API calls objects to their Backbone.Model classes.
 		/*Example: {
 			Flight:lively.partneradmin.model.valueobjects.FlightModel,
 			FlightGroup:lively.partneradmin.model.valueobjects.FlightGroupModel
@@ -60,12 +59,12 @@ pulley.model.LocalData = function(){
 		}
 		return null;
 	}
-	this.updateObjects = function(objects){//(Array (or single instance) of Objects/ModelControllers to be added, modified or removed.)
+	this.updateObjects = function(objects){//(Array (or single instance) of Objects/Backbone.Models to be added, modified or removed.)
 		var  _this = this;
 		if(__config.logging) log('LocalData.updateObjects()');
 		
 		var errors = [];
-		var resultingObjects = [];//A collection of the resulting ModelControllers, to return. Maps 1-to-1 to objects submitted.
+		var resultingObjects = [];//A collection of the resulting Backbone.Models, to return. Maps 1-to-1 to objects submitted.
 		if(objects instanceof Array){
 			for(var i in objects){
 				var obj = objects[i];
@@ -88,7 +87,7 @@ pulley.model.LocalData = function(){
 			return {success:true, message:'Successfully updated all objects.', data:resultingObjects};
 		}
 		
-		function updateObject(newObjectJSON){//(JSONObj or ModelController):Object. Adds object, or updates an existing object.
+		function updateObject(newObjectJSON){//(JSONObj or Backbone.Model):Object. Adds object, or updates an existing object.
 			var catalogedObjectsOfType = _this.getCatalogByObjType(newObjectJSON.objType);
 			var existingObject = catalogedObjectsOfType[newObjectJSON.id];
 			if(existingObject){
@@ -97,8 +96,8 @@ pulley.model.LocalData = function(){
 				return {success:true, message:'Updated existing object.', data:existingObject};
 			}else{
 				//If it doesn't exist, add it.
-				var modelControllerClass = _this.modelControllerClassesByType[newObjectJSON.objType];
-				var newObject = new modelControllerClass(newObjectJSON);//ModelController. Create a new ModelController instance, using the JSON object as an initializer.
+				var modelClass = _this.modelClassesByType[newObjectJSON.objType];
+				var newObject = new modelClass(newObjectJSON);//Backbone.Model. Create a new Backbone.Model instance, using the JSON object as an initializer.
 				catalogedObjectsOfType[newObjectJSON.id] = newObject;
 				return {success:true, message:'Added object.', data:newObject};
 			}
@@ -146,7 +145,7 @@ pulley.model.LocalData = function(){
 		}
 	}
 	
-	this.removeObjects = function(objects){//(Array of Objects or ModelControllers to be removed from the catalog.):Object
+	this.removeObjects = function(objects){//(Array of Objects or Backbone.Models to be removed from the catalog.):Object
 		var  _this = this;
 		if(__config.logging) log('LocalData.updateObjects()');
 		
@@ -171,7 +170,7 @@ pulley.model.LocalData = function(){
 			return {success:true, message:'Successfully removed all objects.'};
 		}
 		
-		function removeObject(objectToRemove){//(JSONObj or ModelController):Object
+		function removeObject(objectToRemove){//(JSONObj or Backbone.Model):Object
 			var catalogedObjectsOfType = _this.catalog[objectToRemove.objType+'s'];
 			if(!catalogedObjectsOfType){
 				return {success:false, message:'There are no cataloged items of this type.', data:objectToRemove};
@@ -188,21 +187,21 @@ pulley.model.LocalData = function(){
 			}
 		}
 	}
-}
+	
+	
+});
 
 
 //EXTEND
-pulley.model.LocalData = Class.extend(new pulley.model.LocalData());
-pulley.model.LocalData.type = 
-pulley.model.LocalData.prototype.type = 'pulley.model.LocalData';
+Pulley.model.LocalData.type = Pulley.model.LocalData.prototype.type = 'Pulley.model.LocalData';
 
 
 //STATIC VARS
-//pulley.model.LocalData.staticVar = null;
+//Pulley.model.LocalData.staticVar = null;
 
 
 //STATIC METHODS
-//pulley.model.LocalData.staticMethod = function(){};
+//Pulley.model.LocalData.staticMethod = function(){};
 
 
 

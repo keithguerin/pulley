@@ -1,5 +1,5 @@
 /*****
-File: Utility
+File: Pulley.Utility
 Notes: These utilities are used throughout the app, and provide shortcuts. This is not a class, because it would negate the purpose of the shortcuts.
 *****/
 
@@ -57,7 +57,57 @@ function throwError(message){
 }
 
 
-
+function registerNamespace(namespace){ //(String):void
+	var namespaceParts = namespace.split('.');
+	if(namespaceParts.length > 7) e.e; //Only 7 levels of depth are supported. Add more below if needed.
+	var p0 = namespaceParts[0];
+	var p1 = namespaceParts[1];
+	var p2 = namespaceParts[2];
+	var p3 = namespaceParts[3];
+	var p4 = namespaceParts[4];
+	var p5 = namespaceParts[5];
+	var p6 = namespaceParts[6];
+	for(var i in namespaceParts){
+		i = eval(i);
+		switch(i){
+			case 0:
+				if(!window[p0]){//If the namespace doesn't exist yet, create it.
+					window[p0] = {};
+				}
+				break;
+			case 1:
+				if(!window[p0][p1]){
+					window[p0][p1] = {};
+				}
+				break;
+			case 2:
+				if(!window[p0][p1][p2]){
+					window[p0][p1][p2] = {};
+				}
+				break;
+			case 3:
+				if(!window[p0][p1][p2][p3]){
+					window[p0][p1][p2][p3] = {};
+				}
+				break;
+			case 4:
+				if(!window[p0][p1][p2][p3][p4]){
+					window[p0][p1][p2][p3][p4] = {};
+				}
+				break;
+			case 5:
+				if(!window[p0][p1][p2][p3][p4][p5]){
+					window[p0][p1][p2][p3][p4][p5] = {};
+				}
+				break;
+			case 6:
+				if(!window[p0][p1][p2][p3][p4][p5][p6]){
+					window[p0][p1][p2][p3][p4][p5][p6] = {};
+				}
+				break;
+		}
+	}
+}
 
 function isElementVisible(element){//(element):Boolean
 	var coords = element.getBoundingClientRect();
@@ -80,7 +130,19 @@ function degreesToRadians(angleInDegrees) {
 }
 
 
-
+function isString(object) { //(Object):Boolean
+	var objectType = typeof object;
+	var value = (objectType == 'string');
+	return value;
+}
+function isPath(obj){
+	if(isString(obj)){
+		if(obj.indexOf('/') || obj.indexOf('#')){
+			return true;
+		}
+	}
+	return false;
+}
 /*function isNumber(value){//(Object):Boolean
 	if((typeof value === "number") && Math.floor(value) === value){
 		return true;
@@ -119,10 +181,41 @@ String.prototype.toCamelCase = function(){
 		.replace( / /g, '' );
 	return value;
 }
+String.prototype.toDashCase = function(){
+	var original = this;
+	var value = original.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+	//var value = original.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+	return value;
+}
 String.prototype.toTitleCase = function(){
 	var value = this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 	return value;
 };
+String.prototype.plural = function () {
+	var lastChar = this.charAt(this.length);
+	if (lastChar === 'y') {
+		if ( (this.charAt(this.length - 2)).isVowel() ) {
+			// If the y has a vowel before it (i.e. toys), then you just add the s. 
+			return this + 's';
+		}
+		else {
+			// If a this ends in y with a consonant before it (fly), you drop the y and add -ies to make it plural. 
+			return this.slice(0, -1) + 'ies';
+		}
+	}
+	else if (this.substring( this.length - 2) === 'us') {				
+		// ends in us -> i, needs to preceed the generic 's' rule
+		return this.slice(0, -2) + 'i'; 
+	}
+	else if (['ch', 'sh'].indexOf(this.substring( this.length - 2)) !== -1 || ['x','s'].indexOf(lastChar) !== -1) {
+	 	// If a this ends in ch, sh, x, s, you add -es to make it plural.
+		return this + 'es';
+	}
+	else {
+		// anything else, just add s			
+		return this + 's';
+	}
+}
 function doesArrayContainValue(array, value){
 	var i = array.length;
 	while (i--) {
@@ -148,14 +241,23 @@ function removeDuplicatesFromArray(array){
 	return a
 }
 
-function cleanArray(deleteValue) {
-	for (var i = 0; i < this.length; i++) {
-		if (this[i] == deleteValue) {         
-			this.splice(i, 1);
+function removeObjectFromArray (object, array) {
+	for(var i in array){
+		var obj2 = array[i];
+		if(obj2 == object){
+			array.splice(i, 1);
+		}
+	}
+}
+
+function cleanArray(array, valueToDelete) {
+	for (var i = 0; i < array.length; i++) {
+		if (array[i] == valueToDelete) {         
+			array.splice(i, 1);
 			i--;
 		}
 	}
-	return this;
+	return array;
 };
 
 
@@ -337,9 +439,13 @@ function Delete_Cookie( name, path, domain ) {
 
 
 function getURLVar(name) {
-    return decodeURI(
+    var value = decodeURI(
         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
     );
+	if(value == 'null'){
+		value = null;
+	}
+	return value;
 }
 
 
@@ -372,10 +478,221 @@ function disableUserScrolling(mouse, keyboard){
 	}
 }
 
+function bustCache(){
+	var uniqueId = Math.round(new Date().getTime() / 1000);
+	
+	/* Todo: Is there a reasonable way to do this. The tags would need to be removed and re-added to the DOM.
+	var scriptTags = $('script').toArray();
+	//$scriptTags.each(function())
+	for(var i in scriptTags){
+		var scriptTag = scriptTags[i];
+		scriptTag.src = styleTag.getAttribute('src') + '?' + uniqueId;
+		//$(scriptTag).attr('src', )
+	}
+	*/
+	
+	var styleTags = $('link[rel="stylesheet"]').toArray();
+	for(var i in styleTags){
+		var styleTag = styleTags[i];
+		styleTag.href = styleTag.getAttribute('href') + '?' + uniqueId;
+	}
+	
+	var images = $('img').toArray();
+	for(var i in images){
+		var image = images[i];
+		image.src = image.getAttribute('src') + '?' + uniqueId;
+	}
+	
+}
+
+function parsePath (path) { //(String):Array of Strings
+	var pathParts = [];
+	if(path){
+		pathParts = path.split('/');
+		pathParts = cleanArray(pathParts, '');
+	}
+	return pathParts;
+}
+
+function selectNavItemsBasedOnURL (useHash, rootPath, rootAlias){
+	//First, find all automatically selected items and remove the selected class.
+	var selectedFlag = 'data-selected-automatically';
+	var automaticallySelectedItems = $('a['+selectedFlag+']').toArray();
+	$(automaticallySelectedItems).removeClass('selected').removeAttr('data-selected-automatically');
+	
+	rootPath = normalizePath(rootPath);
+	
+	//Normalize the path.
+	var path = useHash? window.location.hash : window.location.pathname;
+	path = normalizePath(path);
+	
+	var allAnchors = $('a').toArray();
+	var navItemsToSelect = [];
+	for(var i in allAnchors){
+		var anchor = allAnchors[i];
+		var anchorPath = anchor.pathname;
+		anchorPath = anchorPath.replace(rootPath, '');
+		anchorPath = normalizePath(anchorPath);
+		
+		var isExternalLink = (anchor.origin != window.location.origin);
+		if(!isExternalLink){
+			//Does the anchor link to this exact path?
+			var itsAMatch = (anchorPath == path);
+			if(path == '/'){
+				if(anchorPath == rootAlias){
+					itsAMatch = true;
+				}
+			}
+
+			//Does the anchor link to a parent of the path, that has the data attribute telling it to be selected?
+			var selectIfChildIsSelected = doesElementHaveAttribute(anchor, 'data-select-if-child-is-selected'); //Add this flag to any anchors that you want to be selected if a child state is selected, such as a main nav.
+			var isChildMatch = (path.indexOf(anchorPath) > -1);
+			if(itsAMatch || isChildMatch && selectIfChildIsSelected){
+				navItemsToSelect.push(anchor);
+			}
+		}
+	}
+	
+	//Select the items, and flag them for later removal.
+	$(navItemsToSelect).addClass('selected').attr(selectedFlag, '');
+}
+
+//Normalize paths by removing hash symbols and trailing slash. A normalized URL looks like "/users/adam".
+function normalizePath (path, rootURL) {
+	if(rootURL && rootURL != '/'){
+		path = path.replace(rootURL, '');
+	}
+	if(path.indexOf('//') > -1){
+		console.error('The origin must be removed. Patth in the rootURL to remove it.')
+	}
+	path = path.toLowerCase();
+	//Remove leading # or /#
+	if(path.charAt(0) == '#'){
+		path = path.substring(1);
+	}
+	if(path.substring(0,2) == '/#'){
+		path = path.substring(2);
+	}
+	//Add a leading slash.
+	if(path.charAt(0) != '/'){
+		path = '/' + path;
+	}
+	//Remove trailing slash
+	if(path.charAt(path.length-1) == '/' && path.length > 1){
+		path = path.substring(0, path.length-1);
+	}
+	return path;
+}
+
+function doesElementHaveAttribute(element, attribute){
+	var attributeValue = $(element).attr(attribute);
+	var result = (attributeValue !== undefined);
+	return result;
+}
 
 
 
+function initializeNestedAnchors(){
+	//Nested anchors are invalid HTML. However it can be done using JavaScript. Just make tags like this:
+	//<a2 href='#' target='#'>Nested anchor</a2>
+	var nestedAnchors = $('a2').toArray();
+	$(nestedAnchors).bind('click', function(event){
+		var href = event.target.getAttribute('href');
+		var target = event.target.getAttribute('target');
+		if(!target) target = '_self';
+		window.open(href, target);
+	});
+}
 
+function retinafyImages(){
+	//Find all images with class .retina, and resize them to half of their actual size on load (or if already loaded).
+	//This is easier & cleaner than maintaining manual width='' and height='' tags in html.
+	var retinaImages = $('img.retina').toArray();
+	for(var i in retinaImages){
+		var image = retinaImages[i];
+		var hasDefinedWidth = image.getAttribute('width');
+		var hasDefinedHeight = image.getAttribute('height');
+		var hasDefinedSize = (hasDefinedWidth || hasDefinedHeight);
+		if(!hasDefinedSize){
+			if(isImageLoaded(image)){
+				shrinkIt(image);
+			}else{
+				onImageProgress(image, shinkItCallback);
+				onImageLoaded(image, shinkItCallback);
+			}
+		}
+	}
+	
+	function shinkItCallback(image){	
+		shrinkIt(image);
+	}
+	
+	function shrinkIt(image){
+		image.width = image.naturalWidth / 2;
+		image.height = image.naturalHeight / 2;
+	}
+}
+
+function isImageLoaded(img){
+    // During the onload event, IE correctly identifies any images that
+    // weren’t downloaded as not complete. Others should too. Gecko-based
+    // browsers act like NS4 in that they report this incorrectly.
+    if (!img.complete) {
+        return false;
+    }
+
+    // However, they do have two very useful properties: naturalWidth and
+    // naturalHeight. These give the true size of the image. If it failed
+    // to load, either of these should be zero.
+
+    if (typeof img.naturalWidth !== "undefined" && img.naturalWidth === 0) {
+        return false;
+    }
+
+    // No other way of checking: assume it’s ok.
+    return true;
+}
+function onImageProgress(image, callback){
+	var imageLoadWatcher = imagesLoaded(image); //Uses http://desandro.github.io/imagesloaded/
+	imageLoadWatcher.on( 'progress', function( instance, image2 ) {
+		var result = image2.isLoaded ? 'loaded' : 'broken';
+		//console.log( 'image is ' + result + ' for ' + image2.img.src );
+		callback(image);
+	});
+}
+function onImageLoaded(image, callback){ //(:imgElement, :function) :void
+	var imageLoadWatcher = imagesLoaded(image); //Uses http://desandro.github.io/imagesloaded/
+	imageLoadWatcher.on( 'done', function( instance ) {
+		callback(image);
+	});
+	
+	/*$(image).load(function() {
+		callback(image);
+	});*/
+	/*var uniqueId = Math.round(new Date().getTime() / 1000);
+	var src = image.getAttribute('src');
+	var delimiter = '?'
+	if(src.indexOf('?') > -1){
+		delimiter = '&';
+	}
+	var newSrc = src + delimiter + uniqueId;
+	image.setAttribute('src', newSrc);*/
+}
+
+//Find all images with an SVG source, and change the file extension to .png
+function fallbackFromSVGsToPNGs(){
+	var browserSupportsSVG = Modernizr.svg;
+	if(browserSupportsSVG){
+		return;
+	}
+	var allImagesWithSVGSource = $('img[src*=".svg"]').toArray();
+	for(var i in allImagesWithSVGSource){
+		var image = allImagesWithSVGSource[i];
+		var source = image.src;
+		var newSource = source.substring(0, source.indexOf('.svg')) + '.png';
+		image.src = newSource;
+	}
+}
 
 
 //requestAnimationFrame shim via http://stackoverflow.com/questions/17000394/requestanimationframe-not-available-in-safari-how-to-do-fluid-animations
@@ -406,3 +723,76 @@ function disableUserScrolling(mouse, keyboard){
       clearTimeout(id);
   };
 }());
+
+
+
+//This is an abstraction of Google Analytics event tracking.
+//https://developers.google.com/analytics/devguides/collection/analyticsjs/events
+function track(targetObject, eventType){ //e.g.
+	var category = targetObject; //__config.googleAnalytics_category;
+	var action = eventType; //targetObject + '_' + eventType;
+	//var label = __config.landingPageId
+	ga('send', 'event', category, action); //, label);
+}
+
+
+
+//This is a wrapper for jQuery's ajax call. It helps keep code short, clean, consistent, and includes all neccessary parameters.
+function ajax(params){
+	var method = params.method? params.method : 'get';
+	var dataType = params.dataType? params.dataType : 'json';
+	var timeout = __config.ajaxTimeout? __config.ajaxTimeout : 10000;
+	$.ajax({
+		url: params.url,
+		method: method,
+		data: params.data,
+		dataType: dataType,//We are using JSON-P to allow cross-domain AJAX requests. http://stackoverflow.com/questions/3506208/jquery-ajax-cross-domain
+		timeout: timeout,//Allows errors to be handled, since JSON-P does not return errors.
+		notmodified:function(data){},
+		timeout:function(data){},
+		abort:function(data){},
+		parseerror:function(data){},
+		complete:function(data){},
+		error: function(jqxhr, textStatus, errorThrown){
+			if(params.error) params.error(arguments);
+		},
+		success: function(data, textStatus, jqxhr) {
+			if(data.success){
+				if(params.success) params.success(data, textStatus, jqxhr);
+			}else{
+				if(params.error) params.error(arguments);
+			}
+		}
+	});
+}
+
+
+
+
+var __elementLocks = [];//Array of items that are transitioning. Do not edit directly.
+function lockElement(element){
+	for(var i in __elementLocks){
+		if(element == __elementLocks[i]){
+			return;//Already locked.
+		}
+	}
+	__elementLocks.push(element);
+}
+function unlockElement(element){
+	for(var i in __elementLocks){
+		if(element == __elementLocks[i]){
+			__elementLocks.splice(i, 1);
+			return true;//Found and removed items.
+		}
+	}
+	return false;//Item not found.
+}
+function isElementLocked(element){
+	for(var i in __elementLocks){
+		if(element == __elementLocks[i]){
+			return true;
+		}
+	}
+	return false;
+}
+

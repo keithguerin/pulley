@@ -1,5 +1,5 @@
 /*****
-Class: HTMLInjector
+Class: Pulley.HTMLInjector
 Extends: none
 Implements: none
 Notes: This class allows you to:
@@ -7,57 +7,79 @@ Notes: This class allows you to:
 A) Use HTML includes with JavaScript.
 Example: <div id='appContainer' data-include-src='src/view/App/App.html' data-include-id='app'></div>
 
-B) Initialize ViewControllers automatically by declaring them in HTML.
+B) Initialize View controllers automatically by declaring them in HTML.
 Example: <div class='App'> (Automatically instantiates with a class named 'AppVC' if it exists.
 
-C) Inject HTML through the creation of a new ViewController.
+C) Inject HTML through the creation of a new View controller.
 Example: HTMLInjector.createControllerAndInjectHTML(containerElement, StorySlideVC, 'storySlide3');
 
 These techniques are useful, because they allow you to organize your code cleanly and logically.
 They make the developers job easier, by giving a little bit more work to JavaScript.
 *****/
 
-registerNamespace('pulley');
-pulley.HTMLInjector = function(){
+registerNamespace('Pulley');
+
+Pulley.HTMLInjector = function(){
 	//No real constructor, since this is a static class.
+	
+		//This method recursively loads all HTML files within an element. Then it initializes any controllers within that element.
+	this.init = function(){//(element):void
+		var _this = this;
+		var containerElement = $('body')[0];
+		
+		var HTMLTemplateURLsToPreload = null;//To-do: Grab the template URLs from HTML. (I have largely stopped using JavaScript injection of templates, in favor of jade includes and pre-compilation.)
+		if(HTMLTemplateURLsToPreload){
+			Pulley.HTMLInjector._loadHTMLTemplates(HTMLTemplateURLsToPreload, injectIncludes);
+		}else{
+			injectIncludes();
+		}
+
+		function injectIncludes(){
+			Pulley.HTMLInjector._injectIncludes(containerElement, initializeViews);
+		}
+
+		function initializeViews(){
+			//Pulley.View.autoinitializeViews(containerElement, onInitialized);
+		}
+		
+		function onInitialized(){
+			Pulley.HTMLInjector.pageInitialized = true;
+			_this.dispatchEvent(Pulley.HTMLInjector.PAGE_INITIALIZED);
+			
+			//Call the ready function on all controllers we just initialized.
+			for(var i in window._views){
+				var controller = window._views[i];
+				if(controller.ready && !controller.readied){
+					controller.ready();
+				}
+			}
+		}
+	}
 }
 
-
 //EXTEND Controller
-pulley.HTMLInjector = pulley.Controller.extend(new pulley.HTMLInjector());
-pulley.HTMLInjector.prototype.type = 
-pulley.HTMLInjector.type = 'pulley.HTMLInjector';
+Pulley.HTMLInjector.prototype.type = Pulley.HTMLInjector.type = 'Pulley.HTMLInjector';
 
 
 //STATIC VARS
-pulley.HTMLInjector.templates = null;//Array of HTML template strings.
-
+Pulley.HTMLInjector.templates = null;//Array of HTML template strings.
+Pulley.HTMLInjector.pageInitialized = false;
+Pulley.HTMLInjector.PAGE_INITIALIZED = 'pageInitialized';
 
 //STATIC METHODS
-pulley.HTMLInjector.toString = function(){
+Pulley.HTMLInjector.init = function(){
+	Pulley.HTMLInjector.instance = new Pulley.HTMLInjector();
+}
+
+Pulley.HTMLInjector.toString = function(){
 	return 'HTMLInjector';//Neccessary to implement for the static methods to reference for logging.
 }
 
-//This method recursively loads all HTML files within an element. Then it initializes any controllers within that element.
-pulley.HTMLInjector.initializePage = function(containerElement, HTMLTemplateURLsToPreload, onComplete){//(element):void
-	logMethod(this, 'initializePage', arguments);
-	
-	pulley.HTMLInjector._loadHTMLTemplates(HTMLTemplateURLsToPreload, onHTMLTemplatesLoaded);
-	
-	function onHTMLTemplatesLoaded(){
-		pulley.HTMLInjector._injectIncludes(containerElement, onIncludesInjected);
-	}
-	
-	function onIncludesInjected(){
-		pulley.HTMLInjector._initializeControllers(containerElement, onComplete);
-	}
-}
-
-//This method loads HTML files so that they can be used by a ViewController later.
+//This method loads HTML files so that they can be used by a View controller later.
 //On initialization, if the VC is not provided with a view, it find its template via HTMLInjector.getHTMLTemplateByName(className).
-pulley.HTMLInjector._loadHTMLTemplates = function(arrayOfTemplateURLs, onComplete){
-	if(!pulley.HTMLInjector.templates){
-		pulley.HTMLInjector.templates = [];
+Pulley.HTMLInjector._loadHTMLTemplates = function(arrayOfTemplateURLs, onComplete){
+	if(!Pulley.HTMLInjector.templates){
+		Pulley.HTMLInjector.templates = [];
 	}
 	if(arrayOfTemplateURLs.length < 1){
 		onComplete();
@@ -97,22 +119,22 @@ pulley.HTMLInjector._loadHTMLTemplates = function(arrayOfTemplateURLs, onComplet
 	}
 	
 	function onTemplateLoaded(templateHTML){
-		pulley.HTMLInjector.templates.push(templateHTML);
-		if(pulley.HTMLInjector.templates.length == arrayOfTemplateURLs.length){//All templates have loaded.
+		Pulley.HTMLInjector.templates.push(templateHTML);
+		if(Pulley.HTMLInjector.templates.length == arrayOfTemplateURLs.length){//All templates have loaded.
 			onComplete();
 		}
 	}
 }
 
-pulley.HTMLInjector.getHTMLTemplateByViewControllerClass = function(viewControllerClass){
-	logMethod(this, 'getHTMLTemplateByViewControllerClass', arguments);
-	for(var i in pulley.HTMLInjector.templates){
-		var template = pulley.HTMLInjector.templates[i];
+Pulley.HTMLInjector.getHTMLTemplateByViewClass = function(viewClass){
+	logMethod(this, 'getHTMLTemplateByViewClass', arguments);
+	for(var i in Pulley.HTMLInjector.templates){
+		var template = Pulley.HTMLInjector.templates[i];
 		var j = template.indexOf('class=')+6;//Start of controller name.
 		var quoteCharacter = template.charAt(j);
 		var k = template.indexOf(quoteCharacter, j+1);//End of controller name.
 		var controllerName = template.substring(j+1, k);
-		if(controllerName == viewControllerClass.toString()){
+		if(controllerName == viewClass.toString()){
 			return template;
 		}
 	}
@@ -121,7 +143,7 @@ pulley.HTMLInjector.getHTMLTemplateByViewControllerClass = function(viewControll
 //This method goes through the HTML of a DOMElement and loads any includes.
 //Includes are defined in HTML like this: <div data-include-src="clip.html" data-include-id="clip1"></div>
 //Subsequently, it initializes any controllers that are defined within those includes, and recursively repeats this pattern down through the full DOM tree.
-pulley.HTMLInjector._injectIncludes = function(container, onComplete){
+Pulley.HTMLInjector._injectIncludes = function(container, onComplete){
 	var _this = this;
 	logMethod(this, '_injectIncludes', arguments);
 	var clipsWithHTMLIncludes = $(container).find('*[data-include-src]').toArray();
@@ -167,7 +189,7 @@ pulley.HTMLInjector._injectIncludes = function(container, onComplete){
 				}
 				$(child).addClass(newElementClasses);
 				$(clip).attr('data-include-loaded="true"');
-				pulley.HTMLInjector._injectIncludes(clip, onRecursionComplete);
+				Pulley.HTMLInjector._injectIncludes(clip, onRecursionComplete);
 			},
 			error:function(p1,p2,p3)
 			{
@@ -182,79 +204,6 @@ pulley.HTMLInjector._injectIncludes = function(container, onComplete){
 			parseerror:function(data){},
 			complete:function(data){}
 		});
-	}
-}
-
-//This goes through the HTML of a DOMElement and initializes any controllers.
-//Controllers are defined in HTML like this: <div class="Clip">stuff</div>. This looks for a controller with name ClipVC.
-pulley.HTMLInjector._initializeControllers = function(container, onComplete){
-	var _this = this;
-	logMethod(this, '_initializeControllers', arguments);
-	var clipsWithControllersToInstantiate = $(container).find('*[class]').toArray();
-	var clipsInitialized = 0;
-	for(var i in clipsWithControllersToInstantiate){
-		var clip = clipsWithControllersToInstantiate[i];
-		var clipIsAlreadyInitialized = $(clip).attr('data-controller-initialized');
-		if(!clipIsAlreadyInitialized){
-			var automaticallyFindControllerByClassName = false;//I disabled this, since it makes makes namespacing controllers difficult.
-			if(automaticallyFindControllerByClassName){
-				var clip_classList = clip.className.split(/\s+/);
-				for(var i in clip_classList){
-					if(isNumber(i)){
-						var className = clip_classList[i];
-						var controllerName = className+'VC';
-						var controllerClass = window[controllerName];
-						if(controllerClass){
-							var controller = new controllerClass(clip);//Pass in the view, so it has a reference.
-							break;
-						}
-					}
-				}
-			}else{//Use the data-controller attribute.
-				var controllerName = $(clip).attr('data-controller');
-				if(controllerName){
-					var controllerClass = getControllerByNamespaceString(controllerName);
-					if(controllerClass){
-						var controller = new controllerClass(clip);//Pass in the view, so it has a reference.
-					}
-				}
-			}
-		}
-	}
-	onComplete();
-	
-	function getControllerByNamespaceString(namespaceString){//String, example: pulley.view.controls.NavBarVC
-		var namespacesArray = namespaceString.split(".");;//Array example, ['pulley','view','controls','NavBarVC'];
-		var parentNamespace = window;
-		for(var i in namespacesArray){
-			var childNamespace = namespacesArray[i];
-			parentNamespace = parentNamespace[childNamespace];
-			if(!parentNamespace){
-				e.e;//Invalid namespace.
-			}
-		}
-		var controller = parentNamespace;
-		return controller;
-	}
-}
-
-pulley.HTMLInjector.createControllerAndInjectHTML = function(container, viewControllerClass, id){//(parentDOMElement, viewControllerClass, id):ViewController
-	if(!id){
-		id = viewControllerClass.createUniqueId();
-	}
-	var viewHTML = createHTML(viewControllerClass, id);
-	$(container).append(viewHTML);
-	var clip = document.getElementById(id);
-	var clipVC = new viewControllerClass(clip);
-	return clipVC;
-	
-	function createHTML(viewControllerClass, id){
-		var htmlTemplate = pulley.HTMLInjector.getHTMLTemplateByViewControllerClass(viewControllerClass);
-		var html = '';
-		var pre = htmlTemplate.substring(0, htmlTemplate.indexOf(' '));//All text before the first space.
-		var post = htmlTemplate.substr(htmlTemplate.indexOf(' '));//All text after the first space.
-		html = pre + " id='"+id+"'" + post;
-		return html;
 	}
 }
 

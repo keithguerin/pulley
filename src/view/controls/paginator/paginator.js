@@ -1,12 +1,11 @@
 /*****
-Class: PaginatorVC
-Extends: ViewController, Controller
-Notes:
+Class: Pulley.view.controls.Paginator
+Extends: Pulley.View, Pulley.Controller
+Notes: 
 *****/
 
-registerNamespace('pulley.view.controls');
-
-pulley.view.controls.PaginatorVC = function(){
+registerNamespace('Pulley.view.controls');
+Pulley.view.controls.Paginator = function(){
 	
 	//IMPORT
 	//var FooModel = company.project.model.valueobjects.FooModel;
@@ -19,39 +18,39 @@ pulley.view.controls.PaginatorVC = function(){
 	
 	this.init = function(){//(arguments):void (Arguments are different, whether using Angular or Pulley)
 		
+		//SETTINGS
+		//this.settings_defaults = {};
+		
 		if(this.initializedByAngular){
 			this._super.call(this, arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]);
-		}else{//Using pulley patterns
-			var view = arguments[0];
-			var model = arguments[1];
-			var onComplete = arguments[2];
-			this._super(view, model);//Don't pass through onComplete.
+		}else{//Using Pulley patterns
+			var view_temp = arguments[0];
+			var model_temp = arguments[1];
+			var settings_temp = arguments[2];
+			var onComplete = arguments[3];
+			this._super(view_temp, model_temp, settings_temp);//Don't pass through onComplete.
 		}
 		
-		//SETTINGS
-		//
-		
-		//ASSETS
-		//
-		
 		//MODEL
-		this.model = null;//Array of Objects with format [{label: String, onClick:Function}];
+		if(!this.model){
+			this.model = null;//Array of Objects with format [{label: String, onClick:Function}];
+		}
 		
 		//VIEW
-		this.children.list				= this.$view.find('>ul')[0];
+		this.children.list				= this.$('>ul')[0];
 		this.children.items				= null;//Defined on setModel
 		
 		//CONTROLLER
 		/*this.states = [
-			new State({
+			new Pulley.view.State({
 				id:'state_prepareForTransitionIn',//String
 				implementation: setState_0_prepareForTransitionIn//Function
 			}),
-			new State({
+			new Pulley.view.State({
 				id:'state_primary',
 				implementation: setState_1_primary
 			}),
-			new State({
+			new Pulley.view.State({
 				id:'state_transitionedOut',
 				implementation: setState_2_transitionedOut
 			})
@@ -63,7 +62,7 @@ pulley.view.controls.PaginatorVC = function(){
 	}
 	
 	
-	//OVERRIDE ViewController
+	//OVERRIDE Pulley.View
 	/*this.destroy = function(){//():void
 		this._super();
 	}*/
@@ -93,10 +92,10 @@ pulley.view.controls.PaginatorVC = function(){
 		if(hasModelChanged){
 			
 			//DESTOY OLD VIEW
-			$(this.children.items).off('click', item_onClick);
+			$(this.children.items).off('click', this.item_onClick);
 			this.children.list.innerHTML = '';
 			
-			//APPLY MODEL TO SELF
+			//RENDER MODEL TO SELF
 			for(var i in this.model){
 				var itemModel = this.model[i];
 				var href = itemModel.href? itemModel.href : '';
@@ -110,14 +109,14 @@ pulley.view.controls.PaginatorVC = function(){
 				"</li>";
 				$(this.children.list).append(itemHTML);
 			}
-			this.children.items = this.$view.find('li').toArray();
-			$(this.children.items).on('click', {scope:this}, item_onClick);
+			this.children.items = this.$('li').toArray();
+			$(this.children.items).on('click', {scope:this}, this.item_onClick);
 			
 			if(this.model){
 				if(this.model.length < 2){
 					$(this.children.list).css({display:'none', opacity:0});
 				}else{
-					$(this.children.list).css({display:'block', opacity:1});
+					$(this.children.list).css({display:'inline-block', opacity:1});
 				}
 			}
 			
@@ -126,13 +125,13 @@ pulley.view.controls.PaginatorVC = function(){
 		}
 		
 		//UPDATE THE VIEW
-		this.apply();
+		this.render();
 		
 		if(hasModelChanged){
 			//goto();
 		}
 	}
-	this.apply = function(){//(void):void
+	this.render = function(){//(void):void
 		this._super();
 		
 		//RESET UI
@@ -163,7 +162,8 @@ pulley.view.controls.PaginatorVC = function(){
 	
 	
 	//INSTANCE METHODS
-	function item_onClick(event){//(event):void
+	this.item_onClick = function(event){//(event):void
+		event.preventDefault();
 		var _this = event.data.scope;
 		var item = event.currentTarget;
 		var itemIndex = eval($(item).attr('data-id'));
@@ -177,8 +177,9 @@ pulley.view.controls.PaginatorVC = function(){
 			itemModel.onClick(data);
 		}
 		_this.selectItem(itemModel);
+		_this.dispatchEvent(Pulley.view.controls.Paginator.ITEM_CLICKED, {item:item, itemModel:itemModel, itemIndex:itemIndex});
 	}
-	function selectItem(itemModel){//(Object):void
+	this.selectItem = function(itemModel){//(Object):void
 		var itemIndex = null;
 		for(var i in this.model){
 			var itemModel2 = this.model[i];
@@ -201,13 +202,13 @@ pulley.view.controls.PaginatorVC = function(){
 				$(item).removeClass('selected');
 			}
 		}
-		this._dispatchEvent('itemSelected', this.selectedItem);
+		this.dispatchEvent(Pulley.view.controls.Paginator.ITEM_SELECTED, this.selectedItem);
 	}
-	function selectItemByIndex(i){//(Number):void
+	this.selectItemByIndex = function(i){//(Number):void
 		var itemModel = this.model[i];
 		this.selectItem(itemModel);
 	}
-	function selectItemById(id){//(Number):void
+	this.selectItemById = function(id){//(Number):void
 		var itemModel = null;
 		for(var i in this.model){
 			var itemModel2 = this.model[i];
@@ -225,17 +226,19 @@ pulley.view.controls.PaginatorVC = function(){
 
 
 //EXTEND
-pulley.view.controls.PaginatorVC = pulley.view.ViewController.extend(new pulley.view.controls.PaginatorVC());
-pulley.view.controls.PaginatorVC.type
-pulley.view.controls.PaginatorVC.prototype.type = 'pulley.view.controls.PaginatorVC';
+Pulley.view.controls.Paginator = Pulley.View.extend(new Pulley.view.controls.Paginator());
+Pulley.view.controls.Paginator.type
+Pulley.view.controls.Paginator.prototype.type = 'Pulley.view.controls.Paginator';
 
 
 //STATIC VARS
-//pulley.view.controls.PaginatorVC.staticVar = null;
+//Pulley.view.controls.Paginator.staticVar = null;
+Pulley.view.controls.Paginator.ITEM_SELECTED = 'itemSelected';
+Pulley.view.controls.Paginator.ITEM_CLICKED = 'itemClicked';
 
 
 //STATIC METHODS
-//pulley.view.controls.PaginatorVC.staticMethod = function(){};
+//Pulley.view.controls.Paginator.staticMethod = function(){};
 
 
 /*****

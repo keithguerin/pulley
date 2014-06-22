@@ -1,1 +1,1 @@
-//This file and all other JS files are concatonated and compressed by CodeKit into ../pulley.min.js
+//This file and all other JS files are concatonated and compressed by CodeKit into ../Pulley.min.js

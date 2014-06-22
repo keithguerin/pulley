@@ -1,15 +1,3 @@
-//DEFINE PULLEY APPLICATION NAMESPACE
-/*if(!window.pulley){
-	window.pulley = {
-		model:{
-			valueobjects:{}
-		},
-		view:{
-			controls:{}
-		}
-	}
-}*/
-
 function registerNamespace(namespace){ //(String):void
 	var namespaceParts = namespace.split('.');
 	if(namespaceParts.length > 7) e.e; //Only 7 levels of depth are supported. Add more below if needed.
@@ -61,14 +49,16 @@ function registerNamespace(namespace){ //(String):void
 		}
 	}
 }
-registerNamespace('pulley');
+
 
 
 /*****
-Class: Controller
+Class: pulley.Controller
 Extends: Class
 Notes: All classes should extend this class. It adds additional methods that are needed throughout the app.
 *****/
+
+registerNamespace('pulley');
 
 pulley.Controller = function(){
 	
@@ -127,6 +117,8 @@ pulley.Controller = function(){
 	
 	
 	//INSTANCE METHODS
+	//Todo: More closely implement JavaScript's EventTarget interface.
+	//http://stackoverflow.com/questions/6635138/is-it-possible-to-dispatch-events-on-regular-objects-not-dom-ones
 	this.addEventListener = function(eventType, originalScope, listenerFunction){//(String, obj, function):void
 		if(!eventType || !originalScope || !listenerFunction){
 			e.e;//Throw a runtime error. You must provide an original scope.

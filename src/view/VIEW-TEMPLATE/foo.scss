@@ -1,0 +1,21 @@
+.foo { //section
+	//margin: 15px inherit;
+	//border: 1px solid $midGrey;
+	//background: white;
+	> .inner {
+		//padding: 10px 15px;
+		> header {
+			> h1 {
+				//
+			}
+		}
+		> .body {
+			> .inner {
+				
+			}
+		}
+		> footer {
+			//
+		}
+	}
+}

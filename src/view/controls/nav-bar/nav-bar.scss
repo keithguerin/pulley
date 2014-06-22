@@ -1,4 +1,4 @@
-.NavBar{
+.nav-bar{
 	height: 44px;
 	background: gray;
 	color: white;
@@ -7,7 +7,7 @@
 	box-shadow: 0 -1px 0 rgba(0,0,0,.5) inset; //Dark line along bottom.
 	.inner{
 		position: relative; //Allow children to be absolulely positioned.
-		.navBarButton{
+		.nav-bar-button{
 			display: inline-block;
 			padding: 11px 15px;
 			margin: 0;
