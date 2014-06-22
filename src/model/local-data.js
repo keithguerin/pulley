@@ -16,7 +16,7 @@ Pulley.model.LocalData = Backbone.Model.extend({
 	//function myPrivateMethod(){};//Call via myPrivateMethod(). Does not work since it can only access the prototype and not the instance.
 	//this.myPublicMethod = function(){};//Must be public to override. Call via this.myPublicMethod().
 	
-	this.init = function(modelClassesByType, onComplete){	
+	initialize: function(modelClassesByType, onComplete){	
 		
 		this.modelClassesByType = modelClassesByType;//An object that maps the strings that the API calls objects to their Backbone.Model classes.
 		/*Example: {
@@ -30,10 +30,10 @@ Pulley.model.LocalData = Backbone.Model.extend({
 		}
 		
 		if(onComplete) onComplete();
-	}
+	},
 	
 	//INSTANCE METHODS
-	this.addObject = function(object){
+	addObject: function(object){
 		if(!object){
 			e.e;//No object provided.
 		}
@@ -42,24 +42,24 @@ Pulley.model.LocalData = Backbone.Model.extend({
 		}
 		var catalogedObjectsOfType = this.getCatalogByObjType(object.objType);
 		catalogedObjectsOfType[object.id] = object;
-	}
-	this.getCatalogByObjType = function(objType){
+	},
+	getCatalogByObjType: function(objType){
 		var catalogTypeName = objType+'s'
 		var catalogedObjectsOfType = this.catalog[catalogTypeName];
 		if(!catalogedObjectsOfType){//If a catalog of this item type does not exist yet, create it.
 			catalogedObjectsOfType = this.catalog[catalogTypeName] = [];
 		}
 		return catalogedObjectsOfType;
-	}
-	this.getObjectFromCatalogByObjTypeAndId = function(objType, id){
+	},
+	getObjectFromCatalogByObjTypeAndId: function(objType, id){
 		var catalogedObjectsOfType = this.getCatalogByObjType(objType);
 		if(catalogedObjectsOfType){//If a catalog of this item type does not exist yet, create it.
 			var object = catalogedObjectsOfType[id];
 			return object;
 		}
 		return null;
-	}
-	this.updateObjects = function(objects){//(Array (or single instance) of Objects/Backbone.Models to be added, modified or removed.)
+	},
+	updateObjects: function(objects){//(Array (or single instance) of Objects/Backbone.Models to be added, modified or removed.)
 		var  _this = this;
 		if(__config.logging) log('LocalData.updateObjects()');
 		
@@ -143,9 +143,9 @@ Pulley.model.LocalData = Backbone.Model.extend({
 			}
 			return {success:false, message:'Did not find object to update.'};*/
 		}
-	}
+	},
 	
-	this.removeObjects = function(objects){//(Array of Objects or Backbone.Models to be removed from the catalog.):Object
+	removeObjects: function(objects){//(Array of Objects or Backbone.Models to be removed from the catalog.):Object
 		var  _this = this;
 		if(__config.logging) log('LocalData.updateObjects()');
 		

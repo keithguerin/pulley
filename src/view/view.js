@@ -39,7 +39,7 @@ Pulley.View = Backbone.View.extend({
 	initialize: function (options) { //Valid options: model, collection, el, id, className, tagName, attributes and events
 		//Unneccessary to call super.
 		this.type = this.__proto__.type;
-		Pulley.Module.applyAttributesToObject(options, this);
+		Pulley.Class.applyAttributesToObject(options, this);
 		
 		if(!this.children){
 			this.children = {};
